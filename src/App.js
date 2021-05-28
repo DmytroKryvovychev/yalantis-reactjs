@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import Employees from './pages/Employees';
+import { Birthdays } from './Context';
+
+const dates = JSON.parse(localStorage.getItem('dates'));
 
 function App() {
+  const [birthdays, setBirthdays] = useState(dates);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Birthdays.Provider value={[birthdays, setBirthdays]}>
+      <div className="App">
+        <Switch>
+          <Route path="/employees">
+            <Employees />
+          </Route>
+          <Route path="*">
+            <Redirect to="/employees" />
+          </Route>
+        </Switch>
+      </div>
+    </Birthdays.Provider>
   );
 }
 
