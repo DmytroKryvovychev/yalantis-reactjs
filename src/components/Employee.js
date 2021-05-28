@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import RadioButtons from './RadioButtons';
 
 function Employee({ user, isActive, onChange }) {
@@ -10,5 +12,11 @@ function Employee({ user, isActive, onChange }) {
     </li>
   );
 }
+
+Employee.propTypes = {
+  user: PropTypes.object.isRequired,
+  isActive: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Employee;

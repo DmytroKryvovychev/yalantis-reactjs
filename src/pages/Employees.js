@@ -5,14 +5,8 @@ import EmployeesList from '../components/EmployeesList';
 import BirthdaysList from '../components/BirthdaysList';
 import Divider from '../components/Divider';
 import { Birthdays } from '../Context';
-
-const BASE_URL = 'https://yalantis-react-school-api.yalantis.com/api/task0/users';
-
-const sortBy = (a, b, property) => {
-  if (a[property] > b[property]) return 1;
-  if (a[property] < b[property]) return -1;
-  return 0;
-};
+import { sortBy } from '../functions';
+import { BASE_URL } from '../config';
 
 function Employees() {
   const [users, setUsers] = useState(null);
@@ -50,7 +44,7 @@ function Employees() {
     <div className="container">
       {users ? (
         <>
-          <EmployeesList onChange={handleCheckEmployee} users={users} active={birthdays} />
+          <EmployeesList onChange={handleCheckEmployee} users={users} birthdays={birthdays} />
           <Divider width={2} color="black" />
           <BirthdaysList birthdays={birthdays} />
         </>

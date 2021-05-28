@@ -1,20 +1,6 @@
-function formatDate(date) {
-  const day = date.getDate();
-  const month = date.toLocaleString('en', { month: 'long' });
-  const year = date.getFullYear();
-  return `${day} ${month}, ${year} year`;
-}
+import PropTypes from 'prop-types';
 
-const getMonths = Array.from({ length: 12 }, (e, i) => {
-  return new Date(null, i + 1, null).toLocaleDateString('en', { month: 'long' });
-});
-
-const actualMonths = () => {
-  const actualMonth = new Date().getMonth();
-  return [...getMonths.splice(actualMonth, 11), ...getMonths.splice(0, actualMonth)];
-};
-
-const months = actualMonths();
+import { formatDate, months, sortDob } from '../functions';
 
 function BirthdaysList({ birthdays }) {
   const filterBirthdays = (month) => {
@@ -32,13 +18,7 @@ function BirthdaysList({ birthdays }) {
           <ul key={m}>
             <h3>{filterBirthdays(m).length > 0 && m}</h3>
             {filterBirthdays(m)
-              .sort((a, b) => {
-                const first = new Date(a.dob).getDate();
-                const second = new Date(b.dob).getDate();
-                if (first < second) return -1;
-                if (first > second) return 1;
-                return 0;
-              })
+              .sort(sortDob)
               .map((b, idx) => {
                 return (
                   <li
@@ -53,10 +33,14 @@ function BirthdaysList({ birthdays }) {
           </ul>
         ))
       ) : (
-        <h3 className="no_emp">No selected employees</h3>
+        <h3 className="no_emp">Employees List is empty</h3>
       )}
     </div>
   );
 }
+
+BirthdaysList.propTypes = {
+  birthdays: PropTypes.array.isRequired,
+};
 
 export default BirthdaysList;

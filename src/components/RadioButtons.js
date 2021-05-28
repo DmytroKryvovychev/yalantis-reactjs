@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function RadioButtons({ initialState, onChangeOption }) {
   const [checkedOption, setChecked] = useState(initialState);
@@ -24,5 +25,10 @@ function RadioButtons({ initialState, onChangeOption }) {
     </div>
   );
 }
+
+RadioButtons.propTypes = {
+  initialState: PropTypes.bool.isRequired,
+  onChangeOption: PropTypes.func.isRequired,
+};
 
 export default RadioButtons;

@@ -1,13 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import RadioButtons from './RadioButtons';
 import Employee from './Employee';
+import { alphabet } from '../functions.js';
 
-const alphabet = [...Array(26)].map((_, i) => String.fromCharCode(++i + 64));
-
-function EmployeesList({ onChange, users, active }) {
-  const birthdays = active;
-
+function EmployeesList({ onChange, users, birthdays }) {
   const isActive = (user) => {
     return birthdays && birthdays.find((u) => u.id === user.id);
   };
@@ -44,5 +41,11 @@ function EmployeesList({ onChange, users, active }) {
     </div>
   );
 }
+
+EmployeesList.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired,
+  birthdays: PropTypes.array.isRequired,
+};
 
 export default EmployeesList;

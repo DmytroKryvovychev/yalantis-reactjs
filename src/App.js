@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Employees from './pages/Employees';
 import { Birthdays } from './Context';
 
